@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="530.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml" fx:controller="com.geekbrains.java2.lesson4.homework.Controller">
+    <center>
+        <VBox>
+            <MenuBar fx:id="menuBar" prefHeight="30.0" prefWidth="650.0" >
+                <Menu fx:id="mMain" text="File">
+                    <MenuItem text="Exit" onAction="#handleExitAction"></MenuItem>
+                    <MenuItem fx:id="mAbout" text="About" onAction="#handleAboutAction"></MenuItem>
+                </Menu>
+            </MenuBar>
+            <TextArea fx:id="messagesList" prefHeight="470.0" prefWidth="650.0" wrapText="true"/>
+            <HBox>
+                <TextField fx:id="messageField" prefHeight="30.0" prefWidth="570.0" promptText="Put your message here">
+                    <HBox.margin>
+                        <Insets right="10.0"/>
+                    </HBox.margin>
+                </TextField>
+                <Button fx:id="sendButton" styleClass="sendButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="SEND">
+                    <font>
+                        <Font name="System Bold" size="14.0"/>
+                    </font>
+                </Button>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
