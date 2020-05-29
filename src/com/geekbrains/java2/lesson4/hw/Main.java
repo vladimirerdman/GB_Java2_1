@@ -1,4 +1,4 @@
-package com.geekbrains.java2.lesson4.JavaFX;
+package com.geekbrains.java2.lesson4.hw;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
