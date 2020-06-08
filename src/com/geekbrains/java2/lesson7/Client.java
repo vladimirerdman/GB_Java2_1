@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Client {
     public static void setAuthorized(boolean authorized) {
@@ -29,6 +30,7 @@ public class Client {
                                 if (strFromServer.startsWith("/authOk")) {
                                     setAuthorized(true);
                                     System.out.println("Authorized on server");
+                                    Client.runOutputThread(out);
                                     break;
                                 }
                                 System.out.println(strFromServer + "\n");
@@ -49,10 +51,31 @@ public class Client {
                     }
                 }
             });
-            t.setDaemon(true);
             t.start();
-        } catch (IOException e) {
+            t.join();
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private static Thread runOutputThread(DataOutputStream out) {
+        Thread thread = new Thread(()-> {
+            while (!Thread.currentThread().isInterrupted()) {
+                Scanner scanner = new Scanner(System.in);
+                while (true) {
+                    String message = scanner.nextLine();
+                    try {
+                        out.writeUTF(message);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    if (message.equals("/end")) {
+                        break;
+                    }
+                }
+            }
+        });
+        thread.start();
+        return thread;
     }
 }
