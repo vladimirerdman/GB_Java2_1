@@ -1,10 +1,10 @@
-package com.geekbrains.java2.lesson8;
+package com.geekbrains.java2.lesson8.auth;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuthService {
+public class DatabaseAuthService implements AuthenticationService {
     Connection conn = null;
 
     private class User {
@@ -21,11 +21,8 @@ public class AuthService {
 
     private List<User> userList;
 
-    public AuthService() {
+    public DatabaseAuthService() {
         userList = new ArrayList<>();
-//        userList.add(new User("login1", "pass1", "nick1"));
-//        userList.add(new User("login2", "pass2", "nick2"));
-//        userList.add(new User("login3", "pass3", "nick3"));
 
         try {
             conn = DriverManager.
@@ -42,10 +39,6 @@ public class AuthService {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-//        );
-        // add application code here
-
     }
 
     public void start() {
