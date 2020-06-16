@@ -20,6 +20,9 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class ChatController implements Stageable {
     private ObservableList<String> nickListItems;
@@ -122,7 +125,7 @@ public class ChatController implements Stageable {
         int selectedIndex = (Integer) nickList.getSelectionModel().getSelectedIndices().get(0);
         String messageText = newMessage.getText().trim();
         if(!messageText.isEmpty()) {
-            chatText += "<p align='right'>" + messageText + "</p>";
+            chatText += "<p align='right'>" + messageText + " __ " + LocalTime.now().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + "</p>";
             messageArea.getEngine().loadContent(chatText);
             if(selectedIndex!=0) {
                 messageText = "/w " + nickList.getSelectionModel().getSelectedItems().get(0) + " " +messageText;
